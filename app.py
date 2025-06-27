@@ -8,13 +8,12 @@ class DragDropLabel(QLabel):
         super().__init__()
         self.setAcceptDrops(True)
         self.setAlignment(Qt.AlignCenter)
-        self.setText("Kéo thả ảnh vào đây")
+        self.setText("Drag and drop an image here")
         self.setStyleSheet("border: 2px dashed #aaa;")
         self.pixmap = None
 
     def dragEnterEvent(self, event):
         if event.mimeData().hasUrls():
-            # Kiểm tra file có phải ảnh không (đơn giản kiểm tra đuôi)
             urls = event.mimeData().urls()
             if urls and urls[0].toLocalFile().lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif')):
                 event.accept()
@@ -36,23 +35,21 @@ class DragDropLabel(QLabel):
             self.setText("")
 
     def resizeEvent(self, event):
-        # Khi resize, scale lại ảnh nếu có
         if self.pixmap:
             self.setPixmap(self.pixmap.scaled(self.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation))
 
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Giao diện Upload và Output ảnh với PyQt5")
+        self.setWindowTitle("PyQt5")
         self.initUI()
 
     def initUI(self):
         # Label kéo thả ảnh bên trái
         self.input_label = DragDropLabel()
-        self.input_label.setFixedSize(300, 300)
+        self.input_label.setFixedSize(, 300)
 
-        # Label hiển thị ảnh output bên phải (ban đầu trống)
-        self.output_label = QLabel("Output sẽ hiển thị ở đây")
+        self.output_label = QLabel("Output Here)
         self.output_label.setFixedSize(300, 300)
         self.output_label.setAlignment(Qt.AlignCenter)
         self.output_label.setStyleSheet("border: 1px solid black;")
@@ -77,7 +74,7 @@ class MainWindow(QWidget):
         self.resize(750, 350)
 
     def show_output(self):
-        # Ví dụ đơn giản: copy ảnh input sang output
+        # Hàm xem output
         if self.input_label.pixmap:
             self.output_label.setPixmap(self.input_label.pixmap.scaled(
                 self.output_label.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation))
