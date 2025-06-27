@@ -41,21 +41,21 @@ class DragDropLabel(QLabel):
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("PyQt5")
+        self.setWindowTitle("Cirrhosis Detection App")
         self.initUI()
 
     def initUI(self):
         # Label kéo thả ảnh bên trái
         self.input_label = DragDropLabel()
-        self.input_label.setFixedSize(, 300)
+        self.input_label.setFixedSize(300, 300)
 
-        self.output_label = QLabel("Output Here)
+        self.output_label = QLabel("Output Here")
         self.output_label.setFixedSize(300, 300)
         self.output_label.setAlignment(Qt.AlignCenter)
         self.output_label.setStyleSheet("border: 1px solid black;")
 
         # Nút xem output ở giữa
-        self.btn_view_output = QPushButton("Xem Output")
+        self.btn_view_output = QPushButton("Output ->")
         self.btn_view_output.setFixedSize(100, 40)
         self.btn_view_output.clicked.connect(self.show_output)
 
