@@ -1,22 +1,22 @@
 import os
 from ultralytics import YOLO
 
-# Load và train model với EarlyStopping thông qua tham số patience
-model = YOLO("yolov8n.pt")
+# Đường dẫn tới best model đã lưu
+best_model_path = "best.pt"
+print(f"Loading model from: {best_model_path}")
+
+# Tiếp tục train từ best model
+model = YOLO(best_model_path)
 results = model.train(
     data="C:/Users/Billy/OneDrive/Documents/project_BME/yolo_dataset/data.yaml",
-    epochs=10,
+    epochs=20,
     imgsz=320,
-    batch=4,
+    batch=2,
     device='cpu',
     project='training_results',
     name='exp1',
     patience=10,              # EarlyStopping với patience=10 epochs
-    save=True                 # lưu checkpoints, bao gồm best.pt
+    save=True,                 # lưu checkpoints, bao gồm best.pt
     verbose=True, 
     plots=True
 )
-
-# Đường dẫn tới best model
-best_model = results.best
-print(f"Best model saved at: {best_model}")
